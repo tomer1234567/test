@@ -18,9 +18,9 @@ spec:
         app: {{ .Chart.Name }}
     spec:
       containers:
-        volumeMounts:
-          - name: index-html
-            mountPath: /tmp/html # this will mount the html.index file to it application location
+          volumeMounts:
+            - name: index-html
+              mountPath: /tmp/html # this will mount the html.index file to it application location
         - resources: {}
           terminationMessagePath: /dev/termination-log
           name: {{ .Chart.Name }}
