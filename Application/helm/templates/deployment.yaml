@@ -3,24 +3,21 @@ apiVersion: apps/v1
 metadata:
   name: {{ .Chart.Name }}
 spec:
-  volumes:
-        - name: index-html
-          configMap:
-            name: '{{ .Chart.Name }}-html'
-            defaultMode: 420
   replicas: {{ .Values.ReplicaNumber }}
   selector:
     matchLabels:
       app: {{ .Chart.Name }}
   template:
+    volumes:
+        - name: index-html
+          configMap:
+            name: '{{ .Chart.Name }}-html'
+            defaultMode: 420
     metadata:
       labels:
         app: {{ .Chart.Name }}
     spec:
       containers:
-          volumeMounts:
-            - name: index-html
-              mountPath: /tmp/html # this will mount the html.index file to it application location
         - resources: {}
           terminationMessagePath: /dev/termination-log
           name: {{ .Chart.Name }}
@@ -30,6 +27,9 @@ spec:
           imagePullPolicy: Always
           terminationMessagePolicy: File
           image: {{ .Values.containers.image }}:{{ .Values.containers.tag }}
+          volumeMounts:
+          - name: index-html
+            mountPath: /tmp/html # this will mount the html.index file to it application location
       restartPolicy: Always
       terminationGracePeriodSeconds: 31
   strategy:
