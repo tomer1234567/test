@@ -12,16 +12,16 @@ spec:
       labels:
         app: {{ .Chart.Name }}
     spec:
+    volumes:
+        - name: index-html
+          configMap:
+            name: '{{ .Chart.Name }}-html'
+            defaultMode: 420
       containers:
       - resources: {}
         terminationMessagePath: /dev/termination-log
         name: {{ .Chart.Name }}
         ports:
-         volumes:
-        - name: index-html
-          configMap:
-            name: '{{ .Chart.Name }}-html'
-            defaultMode: 420
         - containerPort: {{ .Values.containers.containerPort }}
           protocol: TCP
         imagePullPolicy: Always
