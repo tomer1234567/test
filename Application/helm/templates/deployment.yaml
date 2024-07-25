@@ -21,7 +21,8 @@ spec:
           protocol: TCP
         imagePullPolicy: Always
         terminationMessagePolicy: File
-        image: {{ .Values.containers.image }}:{{ .Values.containers.tag }}
+        image: quay.io/<myuser15/repo:v1
+        restartPolicy: Always
         terminationGracePeriodSeconds: 30
         volumeMounts:
         - name: index-html
