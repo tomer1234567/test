@@ -22,7 +22,6 @@ spec:
         imagePullPolicy: Always
         terminationMessagePolicy: File
         image: {{ .Values.containers.image }}:{{ .Values.containers.tag }}
-        restartPolicy: Always
         terminationGracePeriodSeconds: 30
         volumeMounts:
         - name: index-html
